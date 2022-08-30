@@ -1,0 +1,51 @@
+Categories
+<table style="border:1px solid black">
+    {% for category in categories %}
+    <tr>
+        <td>{{category.category_id}}</td>
+        <td>{{category.category_name}}</td>
+        <td>{{category.status}}</td>
+        <td>{{category.narration}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+Statuses
+<table style="border:1px solid black">
+    {% for status in statuses %}
+    <tr>
+        <td>{{status}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+Instructors
+<table style="border:1px solid black">
+    {% for instructor in instructors %}
+    <tr>
+        <td>{{instructor.full_name}}</td>
+        <td>{{instructor.course_name}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+Courses
+<table style="border:1px solid black">
+    {% for course in courses %}
+    <tr>
+        <td>{{course.course_id}}</td>
+        <td>{{course.course_name}}</td>
+        <td>{{course.category_id}}</td>
+        <td>{{course.course_duration}}</td>
+        <td>{{course.instructor_id}}</td>
+        <td>{{course.max_batch_size}}</td>
+        <td>{{course.description}}</td>
+        <td>{{course.preview_video}}</td>
+        <td>{{course.syllabus}}</td>
+        <td>{{course.rating}}</td>
+        <td>{{course.status}}</td>
+        <td>{{course.narration}}</td>
+    </tr>
+    {% endfor %}
+</table>
