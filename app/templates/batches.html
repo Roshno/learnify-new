@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <form action="/admin/batches" method ="get">
+        <div class="row">
+          <div class="input-field col s4">
+            <input id="batch_id" name="batch_id" type="text" class="validate">
+            <label for="batch_id">batch Id</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <select id="course_id" name ="course_id">
+              <option value="" disabled selected>course id</option>
+              <option value="all" default>All</option>
+              {% for item in courses %}
+              <option value="{{ item.course_id }}">{{ item.course_id }}</option>
+              {% endfor %}
+              <!-- <option value="2">Option 2</option>
+                <option value="3">Option 3</option> -->
+            </select>
+          </div>
+          
+          <div class="input-field col s3">
+            <select id="status" name ="status">
+              <option value="" disabled selected>Status</option>
+              <option value="all" default>All</option>
+              {% for i in statuses %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+        </div>
+        <div class="row">
+          <input type="submit" onclick="main_()" class ="btn waves-effect waves-light" value="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  {% for item in batches %}
+  <div class="col s6 m3">
+    <div class="card white">
+      <div class="card-content black-text">
+        <span class="card-title" style="color: black !important">batch id: {{ item.batch_id }}</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light red btn modal-trigger "data-target={{item["batch_id"]}}><i class="material-icons">menu</i></a>
+      </div>
+      <div class="card-content">
+        <p>status : {{ item.status }}</p>
+        <p>course : {{ item.course_id}}</p>
+      </div>
+    </div>
+  </div>
+  <div id={{item.batch_id}} class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <form method ="post" action = "/admin/batches" id = "batch"class="col s12">
+          <div class ="row">
+            <input type="text" id ="type" name = "type" value="update" style="color:white" hidden>
+            <!-- <textarea name="type" id="type" class="materialize-textarea" disabled>update</textarea> -->
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="update_batch_id" name="batch_id" value={{item.batch_id}} type="text" class="validate">
+              <label for="batch_id">batch id</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="update_batch_name" name="batch_name" value={{item.batch_name}} type="text" class="validate">
+                <label for="batch_name">batch name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+                <select name = "update_course_id" id ="course_id">
+                    {% for course in courses %}
+                    <option value="{{ course.course_id }}" {% if item.course_id == course.course_id %}selected{% endif %}>{{ course.course_id }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            </div>
+          
+          <div class="row">
+            <div class="input-field col s6">
+              <select id="update_status" name="status">
+                <option value={{item.status}} disabled selected>{{item.status}}</option>
+                {% for i in statuses %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+              </select>
+              <label>status</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="submit" class = "btn waves-effect waves-light">
+            <!-- post request -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- Add batch Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <form name = "add_batch" method ="post" action = "/admin/batches" id = "add_batch"class="col s12">
+        <div class = "row">
+          <input type="text" name="type" value="add" id ="type" style="color:white;" hidden>
+        </div>
+        
+        
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="add_batch_id" name="batch_id" type="text" class="validate">
+            <label for="add_batch_id">batch id</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="add_batch_name" name="batch_name" type="text" class="validate">
+            <label for="add_batch_name">batch name</label>
+          </div>
+          <div class="input-field col s3">
+            <select id="add_course_id" name ="course_id">
+              <option value="" disabled selected>course id</option>
+              <option value="all" default>All</option>
+              {% for item in courses %}
+              <option value="{{ item.course_id }}">{{ item.course_id }}</option>
+              {% endfor %}
+              <!-- <option value="2">Option 2</option>
+                <option value="3">Option 3</option> -->
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <select id="add_status" name="status">
+              <option value="" disabled selected>Status</option>
+              {% for i in statuses %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <input type="submit" value="submit" name="add_batch_submit" onclick="add_batch()" id= "add_batch_submit"class = "btn waves-effect waves-light">
+          <!-- post request -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--End of Add batch Modal Structure  -->
+<!-- Start add batch button -->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large black btn modal-trigger" href="#modal1" >
+  <i class="large material-icons">add</i>
+  </a>
+</div>
+<!-- End of add batch button -->
+</div>
+{% endblock %}

@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-content">
+        <div class="row">
+            <form action="/admin/courses" method ="get" class="col s12">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="course_id" name="course_id" type="text" class="validate">
+                        <label for="course_id">Course id</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select id="category" name ="category">
+                            <option value="" disabled selected>Category id</option>
+                            <option value="*" default>All</option>
+                            {% for item in categories %}
+                            <option value="{{ item.category_id }}">{{ item.category_id }}</option>
+                            {% endfor %}
+                            <!-- <option value="2">Option 2</option>
+                                <option value="3">Option 3</option> -->
+                        </select>
+                    </div>
+                    <div class="input-field col s4">
+                        <select id="instructor" name ="instructor">
+                            <option value="All" default>All</option>
+                            {% for i in instructors %}
+                            <option value="{{ i }}">{{ i.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-field col s4">
+                        <select id="status" name ="status">
+                            <option value="" disabled selected>Status</option>
+                            <option value="All" default>All</option>
+                            {% for i in statuses %}
+                            <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="submit" onclick="course_query()" class ="btn waves-effect waves-light" value="Search">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
+<!-- end of main content -->
+<!-- cards to display -->
+<div class="row">
+
+    {% for item in courses %}
+    <div class="col l3 s3 m3">
+        <div class="card">
+            <!-- <img src={{item["img_url"]}}> -->
+            <!-- <span class="card-title" style="color: black !important">{{ item.course_id }}</span> -->
+            <a class="btn-floating halfway-fab waves-effect waves-light red btn modal-trigger "data-target={{item["course_id"]}}><i class="material-icons">menu</i></a>
+            <div class="card-content">
+                <h3>{{ item.course_name }}</h3>
+                <p>course id : {{ item.course_id }}</p>
+            </div>
+        </div>
+    </div>
+
+<!-- card modal -->
+<div id={{item.course_id}} class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form method ="post" action = "/admin/courses" id = "update_course" class="col s12">
+                <div class ="row">
+                    <input type="text" id ="type" name ="type" value="update" style="color:white" hidden>
+                    <!-- <textarea name="type" id="type" class="materialize-textarea" disabled>update</textarea> -->
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="update_course_id" name="add_course_id" value={{item.course_id}} type="text" class="validate">
+                        <label for="update_course_id">Course id</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="update_course_name" name="add_course_name" value={{item.course_name}} type="text" class="validate">
+                        <label for="update_course_name">Course name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name = "add_course_category" id ="update_course_category">
+                            <option value={{item.category_id}} selected>{{item.category_id}}</option>
+                            {% for i in categories %}
+                            <option value="{{ i }}">{{ i.category_id }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>category id</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="update_course_duration" name="add_course_duration" value={{item.course_duration}} type="text" class="validate">
+                        <label for="update_course_duration">Course duration</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="update_max_batch_size" name="add_max_batch_size" value={{item.max_batch_size}} type="text" class="validate">
+                        <label for="update_max_batch_size">max batch size</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name = "add_course_instructor" id ="update_course_instructor" >
+                            {% for i in instructors %}
+                            <option value="{{ i }}" {% if item.instructor == i.full_name %}selected{% endif %}>{{ i.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>instructor</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="update_description" name="add_description" value={{item.description}} type="text" class="validate">
+                        <label for="update_description">description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="update_preview_video" name="add_preview_video" value={{item.preview_video}} type="text" class="validate">
+                        <label for="update_preview_video">preview video</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="update_syllabus" name="add_course_syllabus" value={{item.syllabus}} type="text" class="validate">
+                        <label for="update_syllabus">syllabus </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select>
+                            {% for i in statuses %}
+                            <option value="{{ i }}" {% if item.status == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>status</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="update_narration" name="add_course_narration" value={{item.narration}} type="text" class="validate">
+                        <label for="update_narration"> narration </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="SAVE" class = "btn waves-effect waves-light">
+                    <input type="button" onclick=deletecourse("{{item.course_id}}") value="Delete" class = "btn red waves-effect waves-light">
+                    <!-- post request -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end of card modal -->
+{% endfor %}
+</div>
+<!-- end of cards to display -->
+<!-- Add Course Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form name = "add_course" method ="post" action = "/admin/courses" id = "add_course" class="col s12">
+                <div class = "row">
+                    <input type="text" name="type" value="add" id ="type" style="color:white;" hidden>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="add_course_id" type="text" name = "add_course_id"  class="validate">
+                        <label for="add_course_id">Course id</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="add_course_name" name = "add_course_name"  type="text" class="validate">
+                        <label for="add_course_name">Course name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name = "add_course_category" id ="add_course_category">
+                            <option value="" disabled selected>Category id</option>
+                            {% for category in categories %}
+                            <option value="{{ category.category_id }}">{{ category.category_id }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="add_course_duration" type="text" name = "add_course_duration"  class="validate">
+                        <label for="add_course_duration">Course duration</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="add_max_batch_size" type="text" name="add_max_batch_size" class="validate">
+                        <label for="add_max_batch_size">max batch size</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name = "add_course_instructor" id ="add_course_instructor" >
+                            <option value="" disabled selected>Instructor id</option>
+                            {% for i in instructors %}
+                            <option value="{{ i.user_id }}">{{ i.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="add_course_description" name="add_course_description" type="text" class="validate">
+                        <label for="add_course_description">description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="add_preview_video" name="add_preview_video" type="text" class="validate">
+                        <label for="add_preview_video">preview video</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="add_course_syllabus" name="add_course_syllabus"  type="text" class="validate">
+                        <label for="add_course_syllabus">syllabus </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name="add_status" id="add_status">
+                            <option value="" disabled selected>Status</option>
+                            {% for i in statuses %}
+                            <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="add_course_narration" name="add_course_narration" type="text" class="validate">
+                        <label for="add_course_narration"> narration </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="submit" name="add_course_submit" onclick="add_course()" id= "add_course_submit"class = "btn waves-effect waves-light">
+                    <!-- post request -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--End of Add Course Modal Structure  -->
+<!-- Start add course button -->
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large black btn modal-trigger" href="#modal1" >
+    <i class="large material-icons">add</i>
+    </a>
+</div>
+
+{% endblock %}
+
+
+

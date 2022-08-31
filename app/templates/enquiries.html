@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <form action="/admin/enquiries" method ="get">
+        <div class="row">
+          <div class="input-field col s4">
+            <input id="enquiry_id" name="enquiry_id" type="text" class="validate">
+            <label for="enquiry_id">Enquiry Id</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <select id="category" name ="category">
+              <option value="" disabled selected>Category id</option>
+              <option value="*" default>All</option>
+              {% for item in categories %}
+              <option value="{{ item.category_id }}">{{ item.category_id }}</option>
+              {% endfor %}
+              <!-- <option value="2">Option 2</option>
+                <option value="3">Option 3</option> -->
+            </select>
+          </div>
+          <div class="input-field col s3">
+            <select id="instructor" name ="instructor">
+              <option value="" disabled selected>Instructor</option>
+              <option value="All" default>All</option>
+              {% for i in instructors %}
+              <option value="{{ i.user_id }}">{{ i.full_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="input-field col s3">
+            <select id="status" name ="status">
+              <option value="" disabled selected>Status</option>
+              <option value="All" default>All</option>
+              {% for i in statuses %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="input-field col s3">
+            <select id="course" name ="course">
+              <option value="" disabled selected>course</option>
+              <option value="All" default>All</option>
+              {% for i in courses %}
+              <option value="{{ i.course_id }}">{{ i.course_id }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <input type="submit" onclick="main_()" class ="btn waves-effect waves-light" value="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  {% for item in enquiries %}
+  <div class="col s6 m3">
+    <div class="card white">
+      <div class="card-content black-text">
+        <span class="card-title" style="color: black !important">Enquiry id: {{ item.enquiry_id }}</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light red btn modal-trigger "data-target={{item["enquiry_id"]}}><i class="material-icons">menu</i></a>
+      </div>
+      <div class="card-content">
+        <p>status : {{ item.status }}</p>
+        <p>user id: {{ item.user_id }}</p>
+      </div>
+    </div>
+  </div>
+  <div id={{item.enquiry_id}} class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <form method ="post" action = "/admin/enquiry" id = "update_enquiry"class="col s12">
+          <div class ="row">
+            <input type="text" id ="type" name = "type" value="update" style="color:white" hidden>
+            <!-- <textarea name="type" id="type" class="materialize-textarea" disabled>update</textarea> -->
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="update_enquiry_id" value={{item.enquiry_id}} type="text" class="validate">
+              <label for="update_enquiry_id">enquiry id</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="update_enquiry_user_id" value={{item.user_id}} type="text" class="validate">
+              <label for="update_enquiry_user_id">user id</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="course_id" value={{item.course_id}} type="text" class="validate">
+              <label for="course_id">course_id</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="update_comment" value={{item.comment}} type="text" class="validate">
+              <label for="update_comment">comment </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <select>
+                <option value={{item.status}} disabled selected>{{item.status}}</option>
+                {% for i in statuses %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+              </select>
+              <label>status</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="enquiry" value={{item.enquiry}} type="text" class="validate">
+              <label for="enquiry"> enquiry </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="submit" class = "btn waves-effect waves-light">
+            <!-- post request -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- Add enquiry Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <form name = "add_enquiry" method ="post" action = "/admin/enquiry" id = "add_enquiry"class="col s12">
+        <div class = "row">
+          <input type="text" name="type" value="add" id ="type" style="color:white;">
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="add_enquiry_user_id" type="text" name = "user_id"  class="validate">
+            <label for="add_enquiry_user_id">user_id</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <select name = "add_enquiry_course_id" id ="course_id" >
+              <option value="" disabled selected>Course</option>
+              {% for i in courses %}
+              <option value="{{ i }}">{{ i.course_id }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="add_enquiry_description" type="text" class="validate">
+            <label for="add_enquiry_description">Enquiry</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <select>
+              <option value="" disabled selected>Status</option>
+              {% for i in statuses %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="input-field col s6">
+            <input id="add_enquiry_comment" type="text" class="validate">
+            <label for="add_enquiry_comment"> comment </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" value="submit" name="add_enquiry_submit" onclick="add()" id= "add_enquiry_submit"class = "btn waves-effect waves-light">
+          <!-- post request -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--End of Add enquiry Modal Structure  -->
+<!-- Start add enquiry button -->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large black btn modal-trigger" href="#modal1" >
+  <i class="large material-icons">add</i>
+  </a>
+</div>
+<!-- End of add enquiry button -->
+</div>
+{% endblock %}

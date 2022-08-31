@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <form action="/admin/categories" method ="get">
+        <div class="row">
+          <div class="input-field col s4">
+            <input id="category_id" name="category_id" type="text" class="validate">
+            <label for="category_id">category Id</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <select id="category" name ="category">
+              <option value="" disabled selected>Category id</option>
+              <option value="all" default>All</option>
+              {% for item in categories %}
+              <option value="{{ item.category_id }}">{{ item.category_id }}</option>
+              {% endfor %}
+              <!-- <option value="2">Option 2</option>
+                <option value="3">Option 3</option> -->
+            </select>
+          </div>
+          
+          <div class="input-field col s3">
+            <select id="status" name ="status">
+              <option value="" disabled selected>Status</option>
+              <option value="all" default>All</option>
+              {% for i in statuses %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+        </div>
+        <div class="row">
+          <input type="submit" onclick="main_()" class ="btn waves-effect waves-light" value="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  {% for item in categories %}
+  <div class="col s6 m3">
+    <div class="card white">
+      <div class="card-content black-text">
+        <span class="card-title" style="color: black !important">{{ item.category_name }}</span>
+        <a class="btn-floating halfway-fab waves-effect waves-light red btn modal-trigger "data-target={{item["category_id"]}}><i class="material-icons">menu</i></a>
+      </div>
+      <div class="card-content">
+        <p>status : {{ item.status }}</p>
+        <p>id : {{ item.category_id}}</p>
+      </div>
+    </div>
+  </div>
+  <div id={{item.category_id}} class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <form method ="post" action = "/admin/categories" id = "category"class="col s12">
+          <div class ="row">
+            <input type="text" id ="type" name = "type" value="update" style="color:white" hidden>
+            <!-- <textarea name="type" id="type" class="materialize-textarea" disabled>update</textarea> -->
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="update_category_id" name="category_id" value={{item.category_id}} type="text" class="validate">
+              <label for="category_id">category id</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="update_category_name" name="category_name" value={{item.category_name}} type="text" class="validate">
+                <label for="category_name">category name</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="update_narration" name="narration"value={{item.narration}} type="text" class="validate">
+              <label for="narration">narration </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <select id="update_status" name="status">
+                <option value={{item.status}} disabled selected>{{item.status}}</option>
+                {% for i in statuses %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+              </select>
+              <label>status</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="submit" class = "btn waves-effect waves-light">
+            <!-- post request -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- Add category Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <form name = "add_category" method ="post" action = "/admin/categories" id = "add_category"class="col s12">
+        <div class = "row">
+          <input type="text" name="type" value="add" id ="type" style="color:white;" hidden>
+        </div>
+        
+        
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="add_category_id" name="category_id" type="text" class="validate">
+            <label for="add_category_id">category id</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="add_category_name" name="category_name" type="text" class="validate">
+            <label for="add_category_name">category name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <select id="add_status" name="status">
+              <option value="" disabled selected>Status</option>
+              {% for i in statuses %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="input-field col s6">
+            <input id="add_category_narration" name="category_narration"  type="text" class="validate">
+            <label for="add_category_narration"> narration </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" value="submit" name="add_category_submit" onclick="add()" id= "add_category_submit"class = "btn waves-effect waves-light">
+          <!-- post request -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--End of Add category Modal Structure  -->
+<!-- Start add category button -->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large black btn modal-trigger" href="#modal1" >
+  <i class="large material-icons">add</i>
+  </a>
+</div>
+<!-- End of add category button -->
+</div>
+{% endblock %}
