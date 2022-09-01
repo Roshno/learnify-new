@@ -110,6 +110,53 @@ def batches():
     statuses =["active","disabled"]
     return render_template('batches.html', batches=batches, statuses =statuses,courses=courses)
 
-@views.route('/user/dashboard', methods=['GET'])
-def user_dashboard():
-    return render_template('user_dashboard.html')
+
+@views.route('/user/courses', methods=['GET'])
+def user_general_courses():
+    return render_template('user_general_courses.html')
+
+@views.route('/user/<string:course_id>',methods=["GET"])
+def user_course():
+    pass
+
+@views.route('/user/<string:course_id>/enquire',methods=["POST"])
+def user_enquire():
+    pass
+
+@views.route('/user/mycourses',methods=["GET"])
+def user_mycourses():
+    pass
+
+@views.route('/user/myenquiries',methods=["GET"])
+def user_myenquiries():
+    pass
+
+@views.route('/user/<string:enquiry>',methods=["GET","PUT"])
+def user_enquiry():
+    pass
+
+
+# @views.route('/user/dasboard',methods=["GET"])
+# def user_dashboard():
+#     pass
+
+# @views.route('/user/dasboard/courses',methods=["GET"])
+# def user_dashboard_courses():
+#     pass
+
+
+# @views.route('/user/dasboard/enquiries',methods=["GET"])
+# def user_dashboard_enquiries():
+#     pass
+
+# @views.route('/user/<string:enquiry_id>',methods=["GET"])
+# def user_custom_enquiry():
+#     pass
+
+# @views.route('/user/courses',methods=["GET"])
+# def user_general_courses():
+#     pass
+
+
+
+
