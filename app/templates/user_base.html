@@ -18,21 +18,7 @@
                 font-family: Roboto;
             }
             
-            .card {
-                margin: 5%;
-            }
-
-            .aligned {
-                display: flex;
-                align-items: center;
-            }
-          
-            span {
-                padding: 10px;
-            }
-           .filter-container{
-            margin-left: 0%;
-           }
+           
            
         </style>
     </head>
@@ -66,16 +52,16 @@
           </ul>
           
         
-        <div class="poda">
+        <div class="container">
             <div class = "row">
                 <div class="col s8 ">
-                    <div class="card main-container">
+                    <div class="card-content">
                        {% block main %}
                         
                        {% endblock %}
                     </div>
                 </div>
-                <div class ="col l4 m4 s2">
+                <div class ="col s4">
                     <div class="card filter-container">
                         <div class="container">
                             {% block filter %}
