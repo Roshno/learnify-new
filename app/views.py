@@ -113,6 +113,7 @@ def batches():
 
 @views.route('/user/courses', methods=['GET'])
 def user_general_courses():
+    
     return render_template('user_general_courses.html')
 
 @views.route('/user/<string:course_id>',methods=["GET"])
@@ -135,27 +136,6 @@ def user_myenquiries():
 def user_enquiry():
     pass
 
-
-# @views.route('/user/dasboard',methods=["GET"])
-# def user_dashboard():
-#     pass
-
-# @views.route('/user/dasboard/courses',methods=["GET"])
-# def user_dashboard_courses():
-#     pass
-
-
-# @views.route('/user/dasboard/enquiries',methods=["GET"])
-# def user_dashboard_enquiries():
-#     pass
-
-# @views.route('/user/<string:enquiry_id>',methods=["GET"])
-# def user_custom_enquiry():
-#     pass
-
-# @views.route('/user/courses',methods=["GET"])
-# def user_general_courses():
-#     pass
 
 
 
