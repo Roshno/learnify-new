@@ -109,3 +109,7 @@ def batches():
     courses = Course.query.all()
     statuses =["active","disabled"]
     return render_template('batches.html', batches=batches, statuses =statuses,courses=courses)
+
+@views.route('/user/dashboard', methods=['GET'])
+def user_dashboard():
+    return render_template('user_dashboard.html')
