@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for,
 from flask_login import login_required, current_user
 from . import db
 from .models import Batch, Category, Course, Enquiry, Qualification, User
-
+import json
 views = Blueprint('views', __name__)
 
 
@@ -113,6 +113,7 @@ def batches():
 
 @views.route('/user/courses', methods=['GET'])
 def user_general_courses():
+    print(len(request.args))
     data ={
         "filter":[
             {
@@ -165,11 +166,13 @@ def user_general_courses():
         "page":{
             "number":"1",
             "left":"hidden",
-            "right":"visible"
-        }
+            "right":""
+        },
+        "url":"http://127.0.0.1:5000/user/courses"
     }
     
     return render_template('user_general_courses.html',data=data)
+    
 
 @views.route('/user/<string:course_id>',methods=["GET"])
 def user_course(course_id):

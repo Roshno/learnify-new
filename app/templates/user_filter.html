@@ -7,102 +7,41 @@
             <div class="input-field col s11">
                 <input type="text" id="search" name="search" {% if request.args.get('search') %}value="{{ request.args.get('search') }}"{% endif %}>
                 <label for="search">Search</label>
-                <i class="material-icons prefix" style="cursor: pointer;" onclick="searchBox.submit()">search</i>
+                <i class="material-icons prefix" style="cursor: pointer;" onclick="redisplay('search')">search</i>
             </div>
         </div>
 
-
-        <div class="row">
-            <label>{{filter_1["name"]}}</label>
-        </div>
-        
-        <div>
-            <p>
-                <label>
-                    <input type="radio" class="filled-in" value= "all"/>
-                    <span>ALL</span>
-                </label>
-            </p>
-            {% for item in filter_1["items"]%}
-                <p>
-                    <label>
-                        <input type="radio" class="filled-in" name="{{ filter_1['name'] }}" onchange="searchBox.submit()" value= "{{item}}" />
-                        <span>{{ item }}</span>
-                    </label>
-                </p>
-            {% endfor %}
+        {% for filter in data["filter"] %}
+            <div class="row">
+                <label>{{filter["name"]}}</label>
+            </div>
             
-        </div>
-
-
-
-
-
-
-
-
-
-        <div class="row">
-            <label>{{filter_1["name"]}}</label>
-        </div>
-        
-        <div>
-            <p>
-                <label>
-                    <input type="radio" class="filled-in" value= "all"/>
-                    <span>ALL</span>
-                </label>
-            </p>
-            {% for item in filter_1["items"]%}
-                <p>
+            <div>
+                <!-- <p>
                     <label>
-                        <input type="radio" class="filled-in" name="{{ filter_1['name'] }}" onchange="searchBox.submit()" value= "{{item}}" />
-                        <span>{{ item }}</span>
+                        <input type="radio" class="filled-in" value= "all"/>
+                        <span>ALL</span>
                     </label>
-                </p>
-            {% endfor %}
-            
-        </div>
-        <div class="row">
-            <label>Status</label>
-        </div>
-        <div>
-            <p>
-                <label>
-                    <input type="radio" class="filled-in" value= "all"/>
-                    <span>ALL</span>
-                </label>
-            </p>
-            {% for item in filter_1['statuses'] %}
-                <p>
-                    <label>
-                        <input type="radio" class="filled-in" name="status" onchange="searchBox.submit()" value= "{{item}}" />
-                        <span>{{ item }}</span>
-                    </label>
-                </p>
-            {% endfor %}
-            
-        </div>
-        <div class="row">
-            <label>Instructor</label>
-        </div>
-        <div>
-            <p>
-                <label>
-                    <input type="radio" class="filled-in" value= "all"/>
-                    <span>ALL</span>
-                </label>
-            </p>
-            {% for item in ['Big josher','Simon Mintor'] %}
-                <p>
-                    <label>
-                        <input type="radio" class="filled-in" name="instructor" onchange="searchBox.submit()" value= "{{item}}" />
-                        <span>{{ item }}</span>
-                    </label>
-                </p>
-            {% endfor %}
-            
-        </div>
+                </p> -->
+                {% for item in filter["items"]%}
+                    <p>
+                        <label>
+                            <input type="radio" class="filled-in" name="{{ filter['name'] }}" onchange="redisplay(event)" value= "{{item}}" />
+                            <span>{{ item }}</span>
+                        </label>
+                    </p>
+                {% endfor %}
+                
+            </div>
+        {% endfor %}
+
+
+
+
+
+
+
+
     </form>
     
 
