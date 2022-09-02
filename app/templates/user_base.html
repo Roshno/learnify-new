@@ -18,7 +18,9 @@
                 font-family: Roboto;
             }
             
-           
+           .container{
+            margin-top: 2% !important;
+           }
            
         </style>
     </head>
@@ -53,6 +55,13 @@
           
         
         <div class="container">
+            <div class="row">
+                <div class ="col s2 offset-s6">
+                    {% block paging_count %}
+            
+                    {% endblock %} 
+                </div> 
+            </div>
             <div class = "row">
                 <div class="col s8 ">
                     <div class="card-content">
@@ -71,10 +80,14 @@
                     </div>
                 </div>
             </div>
-
-            <!-- {% block page %}
+            <div class="row">
+                <div class ="col s8 offset-s4">
+                    {% block paging %}
             
-         {% endblock %}    -->
+                    {% endblock %} 
+                </div> 
+            </div>
+             
         </div>
 
 
@@ -87,7 +100,10 @@
                 $('.sidenav').sidenav();
             });
 
-            
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems);
+            });
 
         </script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
