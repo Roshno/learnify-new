@@ -26,7 +26,7 @@
                 {% for item in filter["items"]%}
                     <p>
                         <label>
-                            <input type="radio" class="filled-in" name="{{ filter['name'] }}" onchange="redisplay(event)" value= "{{item}}" />
+                            <input type="radio" class="filled-in" name="{{ filter['name'] }}" onchange="redisplay(event)" value= "{{item}}"/>
                             <span>{{ item }}</span>
                         </label>
                     </p>
@@ -35,14 +35,6 @@
             </div>
         {% endfor %}
 
-
-
-
-
-
-
-
+            
     </form>
-    
-
 {% endblock %}

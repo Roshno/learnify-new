@@ -11,8 +11,8 @@
 {% endblock %}
 {% block paging %}
 <ul class="pagination">
-    <li class="waves-effect"><i class="material-icons" onclick="page()" id ="page_left" name="page_left" {{data["page"]["left"]}}>chevron_left</i></li>
-    <li class="active  #1a237e indigo darken-4"><a href="#!">{{data["page"]["number"]}}</a></li>
-    <li class="waves-effect"><i class="material-icons" onclick="page()"id ="page_right" name="page_right" {{data["page"]["right"]}}>chevron_right</i></li>
+    <li class="waves-effect"><i class="material-icons" onclick="redisplay('left')" id ="page_left" name="page_left" {{data["page"]["left"]}}>chevron_left</i></li>
+    <li class="active  #1a237e indigo darken-4"><a href="#!" id ="page_number">{{data["page"]["number"]}}</a></li>
+    <li class="waves-effect"><i class="material-icons" onclick="redisplay('right')"id ="page_right" name="page_right" {{data["page"]["right"]}}>chevron_right</i></li>
 </ul>
 {% endblock %}
