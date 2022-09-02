@@ -113,12 +113,67 @@ def batches():
 
 @views.route('/user/courses', methods=['GET'])
 def user_general_courses():
+    data ={
+        "filter":[
+            {
+                "name": "category",
+                "items": [
+                    "all", "coding", "buisness","arts","engineering"
+                ]
+            },
+            {
+                "name": "status",
+                "items": [
+                    "all", "active","disabled"
+                ]
+            },
+            {
+                "name": "instructor",
+                "items": [
+                    "all","Big Josher","Simon Minter"
+                ]
+            
+            }
+        ],
+        "main":[
+            {
+                "title":"title-1",
+                "sub_title":"subtitle-1",
+                "link":"http://127.0.0.1:5000/user/1"
+            },
+            {
+                "title":"title-2",
+                "sub_title":"subtitle-2",
+                "link":"http://127.0.0.1:5000/user/2"
+            },
+            {
+                "title":"title-3",
+                "sub_title":"subtitle-3",
+                "link":"http://127.0.0.1:5000/user/3"
+            },
+            {
+                "title":"title-4",
+                "sub_title":"subtitle-4",
+                "link":"http://127.0.0.1:5000/user/4"
+            },
+            {
+                "title":"title-5",
+                "sub_title":"subtitle-5",
+                "link":"http://127.0.0.1:5000/user/5"
+            }
+        ],
+        "page":{
+            "number":"1",
+            "left":"hidden",
+            "right":"visible"
+        }
+    }
     
-    return render_template('user_general_courses.html')
+    return render_template('user_general_courses.html',data=data)
 
 @views.route('/user/<string:course_id>',methods=["GET"])
-def user_course():
-    pass
+def user_course(course_id):
+    return "OK works "+ course_id
 
 @views.route('/user/<string:course_id>/enquire',methods=["POST"])
 def user_enquire():

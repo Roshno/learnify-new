@@ -1,7 +1,7 @@
 {% extends 'user_base.html' %}
 
 {% block filter %}
-    {% set filter_1 = {"name":"category","items":["coding","buisness","arts"]} %}
+    
     <form method="get" name="searchBox">
         <div class="row">
             <div class="input-field col s11">
@@ -10,6 +10,38 @@
                 <i class="material-icons prefix" style="cursor: pointer;" onclick="searchBox.submit()">search</i>
             </div>
         </div>
+
+
+        <div class="row">
+            <label>{{filter_1["name"]}}</label>
+        </div>
+        
+        <div>
+            <p>
+                <label>
+                    <input type="radio" class="filled-in" value= "all"/>
+                    <span>ALL</span>
+                </label>
+            </p>
+            {% for item in filter_1["items"]%}
+                <p>
+                    <label>
+                        <input type="radio" class="filled-in" name="{{ filter_1['name'] }}" onchange="searchBox.submit()" value= "{{item}}" />
+                        <span>{{ item }}</span>
+                    </label>
+                </p>
+            {% endfor %}
+            
+        </div>
+
+
+
+
+
+
+
+
+
         <div class="row">
             <label>{{filter_1["name"]}}</label>
         </div>
@@ -41,7 +73,7 @@
                     <span>ALL</span>
                 </label>
             </p>
-            {% for item in ['active','disabled'] %}
+            {% for item in filter_1['statuses'] %}
                 <p>
                     <label>
                         <input type="radio" class="filled-in" name="status" onchange="searchBox.submit()" value= "{{item}}" />
