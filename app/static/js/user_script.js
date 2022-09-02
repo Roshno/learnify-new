@@ -67,6 +67,22 @@ function redisplay(event){
         else     url+= ('?'+'page'+'='+value)
 
     }
+    else if( event == 'step_size'){
+        let flip =false;
+        var step_size = document.getElementById('step_size').value
+        alert(step_size)
+        if (url.includes('rows=')) {
+            let index_of =url.indexOf('rows=')
+            url[index_of+5]=step_size
+        }
+        else{
+            
+        }
+
+        if(flip) url+= ('&'+'rows'+'='+step_size)
+        else     url+= ('?'+'rows'+'='+step_size)
+    
+    }
     else{
         let flip =false;
         let name = event.target.name;
@@ -86,4 +102,8 @@ function redisplay(event){
     }
     console.log(url)
     customFetch(url,"GET")
+}
+
+function mainCount(){
+    alert("main")
 }

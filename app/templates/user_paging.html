@@ -2,7 +2,7 @@
 
 {% block paging_count %}
 
-<select name = "step_size">
+<select name = "step_size" id="step_size" onchange="redisplay('step_size')">
     <option value="5" default>5 rows</option>
     <option value="10">10 rows</option>
     <option value="50">50 rows</option>

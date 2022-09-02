@@ -168,6 +168,7 @@ def user_general_courses():
             "left":"hidden",
             "right":""
         },
+        "rows":"5",
         "url":"http://127.0.0.1:5000/user/courses"
     }
     
