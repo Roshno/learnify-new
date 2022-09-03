@@ -171,7 +171,7 @@ def user_general_courses():
         "rows":"5",
         "url":"http://127.0.0.1:5000/user/courses"
     }
-    
+    print(request.args)
     return render_template('user_general_courses.html',data=data)
     
 
