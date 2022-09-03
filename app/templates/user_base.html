@@ -21,7 +21,18 @@
            .container{
             margin-top: 2% !important;
            }
+
+           .card-content .card{
+            background-color: #e1f5fe !important;
+           }
+
+           .card-content .card .card-content{
+            color: black !important;
+           }
            
+           .btn{
+            background-color: #1a237e !important;
+           }
         </style>
     </head>
 
@@ -47,8 +58,8 @@
                 <a href="#email"><span class="white-text email">preston.j@inapp.com</span></a>
               </div></li>
             <li><a href= "#!" class="waves-effect"><i class="material-icons">people  </i>Profile</a></li>
-            <li><a href= "#!" class="waves-effect"><i class="material-icons">search  </i>search course</a></li>
-            <li><a href=" #!" class="waves-effect"><i class="material-icons">school  </i>my courses</a></li>
+            <li><a href= "/user/courses" class="waves-effect"><i class="material-icons">search  </i>search course</a></li>
+            <li><a href=" /user/mycourses" class="waves-effect"><i class="material-icons">school  </i>my courses</a></li>
             <li><a href= "#!" class="waves-effect"><i class="material-icons">message </i>my enquiries</a></li>
                 <!-- create the corresponding html page and name it according to the href given above -->
           </ul>
@@ -56,7 +67,12 @@
         
         <div class="container">
             <div class="row">
-                <div class ="col s2 offset-s6">
+                <div class="col s3">
+                    {% block showing_results %}
+            
+                    {% endblock %} 
+                </div>
+                <div class ="col s2 offset-s3">
                     {% block paging_count %}
             
                     {% endblock %} 

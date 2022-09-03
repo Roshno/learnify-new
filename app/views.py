@@ -169,6 +169,10 @@ def user_general_courses():
             "right":""
         },
         "rows":"5",
+        "showing_results":{
+            "results":"5",
+            "of":"5"
+        },
         "url":"http://127.0.0.1:5000/user/courses"
     }
     print(request.args)
@@ -185,7 +189,64 @@ def user_enquire():
 
 @views.route('/user/mycourses',methods=["GET"])
 def user_mycourses():
-    pass
+    data ={
+        "filter":[
+            {
+                "name": "category",
+                "items": [
+                    "all", "coding", "buisness","arts","engineering"
+                ]
+            },
+            {
+                "name": "status",
+                "items": [
+                    "all", "active","disabled"
+                ]
+            },
+            {
+                "name": "instructor",
+                "items": [
+                    "all","Big Josher","Simon Minter"
+                ]
+            
+            }
+        ],
+        "main":[
+            {
+                "title":"title-1",
+                "sub_title":"subtitle-1",
+                "link":"http://127.0.0.1:5000/user/1"
+            },
+            {
+                "title":"title-2",
+                "sub_title":"subtitle-2",
+                "link":"http://127.0.0.1:5000/user/2"
+            },
+            {
+                "title":"title-3",
+                "sub_title":"subtitle-3",
+                "link":"http://127.0.0.1:5000/user/3"
+            },
+            {
+                "title":"title-4",
+                "sub_title":"subtitle-4",
+                "link":"http://127.0.0.1:5000/user/4"
+            },
+            
+        ],
+        "page":{
+            "number":"1",
+            "left":"hidden",
+            "right":"hidden"
+        },
+        "rows":"5",
+        "showing_results":{
+            "results":"5",
+            "of":"5"
+        },
+        "url":"http://127.0.0.1:5000/user/courses"
+    }
+    return render_template('user_mycourses.html',data=data)
 
 @views.route('/user/myenquiries',methods=["GET"])
 def user_myenquiries():

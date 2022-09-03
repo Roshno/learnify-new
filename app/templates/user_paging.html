@@ -1,7 +1,10 @@
 {% extends 'user_filter.html' %}
 
-{% block paging_count %}
+{% block showing_results %}
+    <p>showing results <span id = "results">{{data["showing_results"]["results"]}}</span> of <span id="of"> {{ data["showing_results"]["of"] }} </span> </p>
+{% endblock %}
 
+{% block paging_count %}
 <select name = "step_size" id="step_size" onchange="redisplay('step_size')">
     <option value="05" default>05 rows</option>
     <option value="10">10 rows</option>
