@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from . import db
 from .models import Batch, Category, Course, Enquiry, Qualification, User
 import json
+from . import controller
 views = Blueprint('views', __name__)
 
 
@@ -122,67 +123,68 @@ def user_profile():
 @views.route('/user/courses', methods=['GET'])
 def user_general_courses():
     print(len(request.args))
-    data ={
-        "filter":[
-            {
-                "name": "category",
-                "items": [
-                    "all", "coding", "buisness","arts","engineering"
-                ]
-            },
-            {
-                "name": "status",
-                "items": [
-                    "all", "active","disabled"
-                ]
-            },
-            {
-                "name": "instructor",
-                "items": [
-                    "all","Big Josher","Simon Minter"
-                ]
+    # data ={
+    #     "filter":[
+    #         {
+    #             "name": "category",
+    #             "items": [
+    #                 "all", "coding", "buisness","arts","engineering"
+    #             ]
+    #         },
+    #         {
+    #             "name": "status",
+    #             "items": [
+    #                 "all", "active","disabled"
+    #             ]
+    #         },
+    #         {
+    #             "name": "instructor",
+    #             "items": [
+    #                 "all","Big Josher","Simon Minter"
+    #             ]
             
-            }
-        ],
-        "main":[
-            {
-                "title":"title-1",
-                "sub_title":"subtitle-1",
-                "link":"/user/c1"
-            },
-            {
-                "title":"title-2",
-                "sub_title":"subtitle-2",
-                "link":"/user/2"
-            },
-            {
-                "title":"title-3",
-                "sub_title":"subtitle-3",
-                "link":"/user/3"
-            },
-            {
-                "title":"title-4",
-                "sub_title":"subtitle-4",
-                "link":"/user/4"
-            },
-            {
-                "title":"title-5",
-                "sub_title":"subtitle-5",
-                "link":"/user/5"
-            }
-        ],
-        "page":{
-            "number":"1",
-            "left":"hidden",
-            "right":""
-        },
-        "rows":"5",
-        "showing_results":{
-            "results":"5",
-            "of":"5"
-        },
-        "url":"/user/courses"
-    }
+    #         }
+    #     ],
+    #     "main":[
+    #         {
+    #             "title":"title-1",
+    #             "sub_title":"subtitle-1",
+    #             "link":"/user/c1"
+    #         },
+    #         {
+    #             "title":"title-2",
+    #             "sub_title":"subtitle-2",
+    #             "link":"/user/2"
+    #         },
+    #         {
+    #             "title":"title-3",
+    #             "sub_title":"subtitle-3",
+    #             "link":"/user/3"
+    #         },
+    #         {
+    #             "title":"title-4",
+    #             "sub_title":"subtitle-4",
+    #             "link":"/user/4"
+    #         },
+    #         {
+    #             "title":"title-5",
+    #             "sub_title":"subtitle-5",
+    #             "link":"/user/5"
+    #         }
+    #     ],
+    #     "page":{
+    #         "number":"1",
+    #         "left":"hidden",
+    #         "right":""
+    #     },
+    #     "rows":"5",
+    #     "showing_results":{
+    #         "results":"5",
+    #         "of":"5"
+    #     },
+    #     "url":"/user/courses"
+    # }
+    data = controller.get_general_courses()
     print(request.args)
     return render_template('user_general_courses.html',data=data)
     
@@ -327,15 +329,15 @@ def user_enquiry():
 def user(id):
     print(id)
     if request.method == 'GET':
-        if id[0] =='c':
-            data = {"course_id":2,"course_name":"coding on cpp","course_duration":4,"instructor":"Big Josher","max_batch_size":20,"description":"description","preview_video":"https://www.youtube.com/embed/tgbNymZ7vqY"}
-            return render_template('course_detail.html',data=data)
-        if id[0] == 'e':
-            return "OK"
+        data = {"course_id":2,"course_name":"coding on cpp","course_duration":4,"instructor":"Big Josher","max_batch_size":20,"description":"description","preview_video":"https://www.youtube.com/embed/tgbNymZ7vqY"}
+        return render_template('course_detail.html',data=data)
     else:
         print(request.json['course_id'])
         return ""
-
+# @views.route('/db')
+# def db():
+#     controller.get_general_courses()
+#     return ""
 
 
 

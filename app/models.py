@@ -2,6 +2,8 @@ from . import db
 from sqlalchemy.sql import func
 from flask_login import UserMixin
 
+class Init():
+    pass
 
 class UserQualification(db.Model):
     usr_q_id = db.Column(db.Integer, primary_key=True)
@@ -20,7 +22,7 @@ class Qualification(db.Model):
     qualification_name = db.Column(db.String(25))
     status = db.Column(db.String(25))
 
-    qualified_members = db.relationship('UserQualification')
+   # qualified_members = db.relationship('UserQualification')
 
 class User(db.Model, UserMixin):
     user_id = db.Column(db.Integer,primary_key =True)
