@@ -189,7 +189,7 @@ def user_general_courses():
 
 @views.route('/user/<string:course_id>',methods=["GET","POST"])
 def user_course(course_id):
-    return "OK works "+ course_id
+    return render_template('course_detail.html')
 
 @views.route('/user/<string:course_id>/enquire',methods=["POST"])
 def user_enquire():

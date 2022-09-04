@@ -1,0 +1,161 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<iframe class="materialboxed" width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY"><img class="materialboxed" width="650" src="../static/images/sample-1.jpg"></iframe>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+var elems = document.querySelectorAll('.materialboxed');
+var instances = M.Materialbox.init(elems);
+});
+</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!--Import materialize.css-->
+<!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Material</title>
+<style>
+* {
+font-family: Roboto;
+}
+
+.container{
+margin-top: 2% !important;
+}
+
+.card-content .card{
+background-color: #e1f5fe !important;
+}
+
+.card-content .card .card-content{
+color: black !important;
+}
+
+.btn{
+background-color: #1a237e !important;
+}
+.checked {
+color: orange;
+}
+
+</style>
+</head>
+
+<body>
+<nav>
+<div class="nav-wrapper #1a237e indigo darken-4">
+<ul class="left hide-on-med-and-down">
+<li><a href="#" data-target="slide-out" class="sidenav-trigger  show-on-large" style="margin-left: 0px"><i class="material-icons">menu</i></a></li>
+</ul>
+<a href="#" class="brand-logo center"><img src="../static/images/logo.PNG" width="100px" style="margin-top: 10px"></a>
+<ul id="nav-mobile" class="right hide-on-med-and-down">
+<li><a href="login.html">LOG OUT</a></li>
+</ul>
+</div>
+</nav>
+<ul id="slide-out" class="sidenav">
+<li><div class="user-view">
+<div class="background">
+<img src="../static/images/office.jpg">
+</div>
+<a href="#user"><img class="circle" src="../static/images/yuna.jpg"></a>
+<a href="#name"><span class="white-text name">Preston Jose</span></a>
+<a href="#email"><span class="white-text email">preston.j@inapp.com</span></a>
+</div></li>
+<li><a href= "/user/profile" class="waves-effect"><i class="material-icons">people  </i>Profile</a></li>
+<li><a href= "/user/courses" class="waves-effect"><i class="material-icons">search  </i>search course</a></li>
+<li><a href=" /user/mycourses" class="waves-effect"><i class="material-icons">school  </i>my courses</a></li>
+<li><a href= "#!" class="waves-effect"><i class="material-icons">message </i>my enquiries</a></li>
+<!-- create the corresponding html page and name it according to the href given above -->
+</ul>
+<div class="container">
+    <div class="row">
+        <div class="col s8">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <h4>Course Name</h4>
+                    </div>
+                    <div class="row">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="row">
+                        <iframe height="240" width="426" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s4">
+            <div class="row">
+                <div class="card white">
+                    <div class="card-content" hidden>
+                        <div class="input-field">
+                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Enquire</label>
+                        </div>
+                        <a class="btn-floating btn-small waves-effect waves-light #1a237e indigo darken-4" id="enquire"><i class="material-icons">chevron_right</i></a>
+                    </div>
+                        <div class="card-content">
+                            <span>Rate the Course</span>
+                            <div class="row rate_it">
+                                &nbsp; &nbsp;<span class="fa fa-star checked" id="1"></span>
+                                             <span class="fa fa-star checked" id="2"></span>
+                                             <span class="fa fa-star checked" id="3"></span>
+                                             <span class="fa fa-star" id="4"></span>
+                                             <span class="fa fa-star" id="5"></span>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });      
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.tap-target');
+        var instances = M.TapTarget.init(elems);
+    });
+    var _1 = document.getElementById('1');
+    var _2 = document.getElementById('2');
+    var _3 = document.getElementById('3');
+    var _4 = document.getElementById('4');
+    var _5 = document.getElementById('5');
+    _1.document.onClick()
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="../static/js/user_script.js"></script>
+</body>
+</html>

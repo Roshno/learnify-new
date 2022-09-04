@@ -99,7 +99,6 @@ function redisplay(event){
 }
 
 function profileEdit(){
-    alert("edit")
     var textarea = document.getElementsByTagName('textarea')
     let i=0;
     while(textarea[i] != undefined){
@@ -107,7 +106,6 @@ function profileEdit(){
         else textarea[i].disabled = false
         i++;
     }
-    alert("out of text")
     let qualification = document.getElementsByClassName('qualification')
     let j=0;
     while(qualification[j] != undefined){
