@@ -148,7 +148,7 @@ def user_general_courses():
             {
                 "title":"title-1",
                 "sub_title":"subtitle-1",
-                "link":"/user/1"
+                "link":"/user/c1"
             },
             {
                 "title":"title-2",
@@ -187,13 +187,11 @@ def user_general_courses():
     return render_template('user_general_courses.html',data=data)
     
 
-@views.route('/user/<string:course_id>',methods=["GET","POST"])
-def user_course(course_id):
-    return render_template('course_detail.html')
 
-@views.route('/user/<string:course_id>/enquire',methods=["POST"])
-def user_enquire():
-    pass
+
+# @views.route('/user/<string:course_id>/enquire',methods=["POST"])
+# def user_enquire():
+#     pass
 
 @views.route('/user/mycourses',methods=["GET"])
 def user_mycourses():
@@ -252,18 +250,91 @@ def user_mycourses():
             "results":"5",
             "of":"5"
         },
-        "url":"http://127.0.0.1:5000/user/courses"
+        "url":"http://127.0.0.1:5000/user/mycourses"
     }
     return render_template('user_mycourses.html',data=data)
 
 @views.route('/user/myenquiries',methods=["GET"])
 def user_myenquiries():
-    pass
+    data ={
+        "filter":[
+            {
+                "name": "courses",
+                "items": [
+                    "cpp", "java", "python","angular","oilpainting"
+                ]
+            },
+            {
+                "name": "status",
+                "items": [
+                    "all", "active","disabled"
+                ]
+            },
+            {
+                "name": "instructor",
+                "items": [
+                    "all","Big Josher","Simon Minter"
+                ]
+            
+            }
+        ],
+        "main":[
+            {
+                "title":"title-1",
+                "sub_title":"subtitle-1",
+                "link":"/user/e1"
+            },
+            {
+                "title":"title-2",
+                "sub_title":"subtitle-2",
+                "link":"/user/e2"
+            },
+            {
+                "title":"title-3",
+                "sub_title":"subtitle-3",
+                "link":"/user/e3"
+            },
+            {
+                "title":"title-4",
+                "sub_title":"subtitle-4",
+                "link":"/user/e4"
+            },
+            {
+                "title":"title-5",
+                "sub_title":"subtitle-5",
+                "link":"/user/e5"
+            }
+        ],
+        "page":{
+            "number":"1",
+            "left":"hidden",
+            "right":""
+        },
+        "rows":"5",
+        "showing_results":{
+            "results":"5",
+            "of":"5"
+        },
+        "url":"/user/myenquiries"
+    }
+    print(request.args)
+    return render_template('user_myenquiries.html',data=data)
 
-@views.route('/user/<string:enquiry>',methods=["GET","PUT"])
+@views.route('/user/enquiry/<string:enquiry>',methods=["GET","PUT"])
 def user_enquiry():
     pass
-
+@views.route('/user/<id>',methods=["GET","POST"])
+def user(id):
+    print(id)
+    if request.method == 'GET':
+        if id[0] =='c':
+            data = {"course_id":2,"course_name":"coding on cpp","course_duration":4,"instructor":"Big Josher","max_batch_size":20,"description":"description","preview_video":"https://www.youtube.com/embed/tgbNymZ7vqY"}
+            return render_template('course_detail.html',data=data)
+        if id[0] == 'e':
+            return "OK"
+    else:
+        print(request.json['course_id'])
+        return ""
 
 
 

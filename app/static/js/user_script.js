@@ -138,3 +138,10 @@ function profileSubmit(){
     }
     customFetch('/user/profile','POST',body)
 }
+
+function submitEnquiry(){
+    var enquiry = document.getElementById('textarea1').value
+    var course_id = document.getElementById('course_id').innerText
+    customFetch('/user/'+course_id,"POST",{"enquiry":enquiry,"course_id":course_id})
+    
+}
