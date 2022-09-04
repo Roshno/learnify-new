@@ -7,7 +7,7 @@ function customFetch(url,type,data){
 
     if(type== "GET"){
         fetch(url,{
-            mehtod: type
+            method: type
         })
         .then( res => {
             if(res.ok){
@@ -17,8 +17,8 @@ function customFetch(url,type,data){
     }
     else if(type == "POST"){
         fetch(url,{
-            mehtod: type,
-            header: {
+            method: type,
+            headers: {
                 "Content-type": "application/json"
             },
             body : JSON.stringify(data)
@@ -28,6 +28,7 @@ function customFetch(url,type,data){
                 console.log("POST Successfull")
             }
         })
+        
     }
 }
 
@@ -97,3 +98,45 @@ function redisplay(event){
     customFetch(url,"GET")  
 }
 
+function profileEdit(){
+    alert("edit")
+    var textarea = document.getElementsByTagName('textarea')
+    let i=0;
+    while(textarea[i] != undefined){
+        if(textarea[i].id == "role") {}
+        else textarea[i].disabled = false
+        i++;
+    }
+    alert("out of text")
+    let qualification = document.getElementsByClassName('qualification')
+    let j=0;
+    while(qualification[j] != undefined){
+        console.log(qualification[j].disabled =false)
+        j++;
+    }
+   
+}
+
+function profileSubmit(){
+    
+    let name          = document.getElementById('name').value;
+    let email         = document.getElementById('email').value;
+    let phone         = document.getElementById('phone').value;
+    let role          = document.getElementById('role').value;
+    let qualification = document.getElementsByName('qualification')
+    
+    let body ={
+        "name"          : name,
+        "email"         : email,
+        "phone"         : phone,
+        "role"          : role,
+        "qualification" : []
+    }
+    for (let q of qualification)
+    {
+        if (q.checked) {
+           body["qualification"].push(q.value)
+        }
+    }
+    customFetch('/user/profile','POST',body)
+}

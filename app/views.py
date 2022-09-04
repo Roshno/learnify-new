@@ -110,6 +110,14 @@ def batches():
     statuses =["active","disabled"]
     return render_template('batches.html', batches=batches, statuses =statuses,courses=courses)
 
+@views.route('/user/profile',methods=["GET","POST"])
+def user_profile():
+    data = {"name":"Joel","email":"joel@gmail.com","phone":"9388775","role":"trainee","qualification_list":["btech","mtech","mcom"],"user_qualifications":["btech"]}
+    if request.method == "GET":
+        return render_template('user_profile.html',data=data)
+    elif request.method =="POST":
+        print(request.json)
+        return ""
 
 @views.route('/user/courses', methods=['GET'])
 def user_general_courses():
@@ -140,27 +148,27 @@ def user_general_courses():
             {
                 "title":"title-1",
                 "sub_title":"subtitle-1",
-                "link":"http://127.0.0.1:5000/user/1"
+                "link":"/user/1"
             },
             {
                 "title":"title-2",
                 "sub_title":"subtitle-2",
-                "link":"http://127.0.0.1:5000/user/2"
+                "link":"/user/2"
             },
             {
                 "title":"title-3",
                 "sub_title":"subtitle-3",
-                "link":"http://127.0.0.1:5000/user/3"
+                "link":"/user/3"
             },
             {
                 "title":"title-4",
                 "sub_title":"subtitle-4",
-                "link":"http://127.0.0.1:5000/user/4"
+                "link":"/user/4"
             },
             {
                 "title":"title-5",
                 "sub_title":"subtitle-5",
-                "link":"http://127.0.0.1:5000/user/5"
+                "link":"/user/5"
             }
         ],
         "page":{
@@ -173,13 +181,13 @@ def user_general_courses():
             "results":"5",
             "of":"5"
         },
-        "url":"http://127.0.0.1:5000/user/courses"
+        "url":"/user/courses"
     }
     print(request.args)
     return render_template('user_general_courses.html',data=data)
     
 
-@views.route('/user/<string:course_id>',methods=["GET"])
+@views.route('/user/<string:course_id>',methods=["GET","POST"])
 def user_course(course_id):
     return "OK works "+ course_id
 
