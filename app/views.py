@@ -197,63 +197,64 @@ def user_general_courses():
 
 @views.route('/user/mycourses',methods=["GET"])
 def user_mycourses():
-    data ={
-        "filter":[
-            {
-                "name": "category",
-                "items": [
-                    "all", "coding", "buisness","arts","engineering"
-                ]
-            },
-            {
-                "name": "status",
-                "items": [
-                    "all", "active","disabled"
-                ]
-            },
-            {
-                "name": "instructor",
-                "items": [
-                    "all","Big Josher","Simon Minter"
-                ]
+    data =controller.get_mycourses(4)
+    # data ={
+    #     "filter":[
+    #         {
+    #             "name": "category",
+    #             "items": [
+    #                 "all", "coding", "buisness","arts","engineering"
+    #             ]
+    #         },
+    #         {
+    #             "name": "status",
+    #             "items": [
+    #                 "all", "active","disabled"
+    #             ]
+    #         },
+    #         {
+    #             "name": "instructor",
+    #             "items": [
+    #                 "all","Big Josher","Simon Minter"
+    #             ]
             
-            }
-        ],
-        "main":[
-            {
-                "title":"title-1",
-                "sub_title":"subtitle-1",
-                "link":"http://127.0.0.1:5000/user/1"
-            },
-            {
-                "title":"title-2",
-                "sub_title":"subtitle-2",
-                "link":"http://127.0.0.1:5000/user/2"
-            },
-            {
-                "title":"title-3",
-                "sub_title":"subtitle-3",
-                "link":"http://127.0.0.1:5000/user/3"
-            },
-            {
-                "title":"title-4",
-                "sub_title":"subtitle-4",
-                "link":"http://127.0.0.1:5000/user/4"
-            },
+    #         }
+    #     ],
+    #     "main":[
+    #         {
+    #             "title":"title-1",
+    #             "sub_title":"subtitle-1",
+    #             "link":"http://127.0.0.1:5000/user/1"
+    #         },
+    #         {
+    #             "title":"title-2",
+    #             "sub_title":"subtitle-2",
+    #             "link":"http://127.0.0.1:5000/user/2"
+    #         },
+    #         {
+    #             "title":"title-3",
+    #             "sub_title":"subtitle-3",
+    #             "link":"http://127.0.0.1:5000/user/3"
+    #         },
+    #         {
+    #             "title":"title-4",
+    #             "sub_title":"subtitle-4",
+    #             "link":"http://127.0.0.1:5000/user/4"
+    #         },
             
-        ],
-        "page":{
-            "number":"1",
-            "left":"hidden",
-            "right":"hidden"
-        },
-        "rows":"5",
-        "showing_results":{
-            "results":"5",
-            "of":"5"
-        },
-        "url":"http://127.0.0.1:5000/user/mycourses"
-    }
+    #     ],
+    #     "page":{
+    #         "number":"1",
+    #         "left":"hidden",
+    #         "right":"hidden"
+    #     },
+    #     "rows":"5",
+    #     "showing_results":{
+    #         "results":"5",
+    #         "of":"5"
+    #     },
+    #     "url":"http://127.0.0.1:5000/user/mycourses"
+    # }
     return render_template('user_mycourses.html',data=data)
 
 @views.route('/user/myenquiries',methods=["GET"])
@@ -334,10 +335,10 @@ def user(id):
     else:
         print(request.json['course_id'])
         return ""
-# @views.route('/db')
-# def db():
-#     controller.get_general_courses()
-#     return ""
+@views.route('/db')
+def db():
+    controller.get_mycourses('4')
+    return ""
 
 
 
