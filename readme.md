@@ -1,6 +1,6 @@
-#Learnfy CRM Project
+# Learnfy CRM Project
 
-##Setup Guide
+## Setup Guide
 
 - Install Virtual env
  '''console
